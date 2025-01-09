@@ -1,4 +1,4 @@
-![less](https://github.com/user-attachments/assets/671ebb62-3a70-4e39-8c55-86f0d30605ad)#  samsung-riscv
+#  samsung-riscv
 
 This is a RISC-V Talent Development Program, powered by Samsung Semiconductor India Research (SSIR) along with VLSI System Design (VSD).
 
