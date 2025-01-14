@@ -75,3 +75,65 @@ $ riscv64-unknown-elf-objdump -d sum.o | less
 
 
  * For mine it is same but for you it should change for that please change the **a** value from 10 to 100 or something big number.
+   --------------------------------------------------------------
+   </details>
+
+<details>
+<summary><b>Task 2:</b> Using SPIKE simulation tool to verify output of the code with respect to gcc-compiler output and understanding of assmebly code calculations on register using the SPIKE. </summary>
+<br>
+
+**1. Create a simple c file as in below image and compile it with gcc and see the output.**
+
+![1cat snum](https://github.com/user-attachments/assets/53a5018d-539a-4017-b8b0-51fd4930f5e5)
+
+**2. Now verify that your code is giving same output even when you use RISC-V compiler as shown.**
+
+![2verify with spike](https://github.com/user-attachments/assets/d7cf3dd3-4d2c-49b2-9624-131ad8b6b135)
+* Note here that spike command is used in place of ./a.out to see the output and successfully we have obtained same output in both try.
+```
+$ riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o num.o num.c
+
+$ spike pk num.o
+```
+
+![3debug -d](https://github.com/user-attachments/assets/3dead526-65ef-4034-807c-255b5a1b08ba)
+
+**3. Now see the dumpfile for both -O1 and -Ofast compiler optimization flag.**
+
+* Dump file of -O1
+
+   ```$ riscv64-unknown-elf-objdump -d num.o | less```
+
+![image](https://github.com/user-attachments/assets/e1fe63ea-fe1f-4dc7-a906-875a3fc0b9b6)
+
+* Dump file of -Ofast
+
+![4debug from0to1st instruction](https://github.com/user-attachments/assets/18ea2617-9bff-418b-92fe-83d8c3bdab63)
+
+
+
+**4. Getting to know the assembly code instructions using the SPIKE tool.**
+
+* Note here i am using -Ofast dumpfile to explain the instructions
+* First run the below command in image after entering the spike tool. The last part of command is the register hexadecimal address which may vary for you.
+  ```
+  until pc 0 100b0
+  ```
+
+![4debug from0to1st instruction](https://github.com/user-attachments/assets/ccc9e580-c8ac-4760-93f1-eef25427c4cd)
+
+
+* What does the above command make is that it will load register operation upto that address
+* Now first check the content of a0 by entering ```reg 0 a0``` you will get 0*0000.... which i have skiped here.
+* If you press enter without typing it the first instruction lui a0,0x2b gets executed.
+* Now what does lui mean ? Its nothing but **load upper immediate** basically a RISC-V register has 32 bits in which the first 7 are opcode and next from 7 to 11 is rd and next remaning bits are immediate to which the value 0x2b is inserted as you can see in the picture.
+* Next instruction which is going to be executed according to dumpfile will be addi sp,sp,-48.
+* which means 48 decimal value which will be 30 in hexa that much will be subtracted from the current stack pointer value. The changes of values are shown in below images.
+
+![5check a0 value after 1st inst](https://github.com/user-attachments/assets/67dd4310-fbb4-4fc2-aedf-e83034587d57)
+
+![6final calculation](https://github.com/user-attachments/assets/06670ac4-cb46-49d0-8e46-2f5a5fc6a5a2)
+
+
+* Now what does addi mean? well it means add immediate which will add the 48 decimal value to the destination register.
+* Like this you can execute all the instruction using SPIKE tool and see what does each one of them actually do.
