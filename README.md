@@ -620,3 +620,26 @@ This is the instruction table divided with respect to registers bit columns:
 ![SLL](https://github.com/maazm007/vsdsquadron-mini-internship/assets/83294849/885a63bc-485e-4594-8d15-52f2ec8da800)
 
 </details> 
+<summary><b>Task 5:</b>RISC-V Based Temperature Monitoring and Control System</summary>  
+<br>
+Objective: Create a temperature monitoring and control system that uses the VSDSquadron Mini to read temperature data from an analog sensor and control a fan or heater based on predefined temperature thresholds.
+
+Components:
+
+VSDSquadron Mini RISC-V development board for processing.
+Temperature Sensor (e.g., LM35 or DHT11) for measuring the ambient temperature.
+Relay or Transistor to control the fan or heater.
+LED indicators to show system status (e.g., fan on/off, heating on/off).
+Functionality:
+
+The board reads the temperature data via the ADC (Analog to Digital Converter) pins (e.g., PD0-PD7, PA1, PA2, PC4).
+Based on the temperature, the board will turn on/off a relay or a transistor connected to the fan/heater using PWM signals to regulate the system.
+Display system status using onboard LEDs or a serial display for monitoring.
+Optionally, add a communication interface (UART or SPI) to log data or send alerts to a connected system.
+Steps:
+
+Set up the board with PlatformIO and configure your development environment.
+Interface the temperature sensor with the board's ADC input pins.
+Write the code to read sensor values, process the temperature, and compare it to set thresholds.
+Use the GPIO pins to control the relay/transistor that switches the fan or heater on/off.
+Implement feedback using LEDs or a simple display to visualize the temperature status.
