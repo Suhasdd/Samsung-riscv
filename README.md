@@ -620,6 +620,7 @@ This is the instruction table divided with respect to registers bit columns:
 ![SLL](https://github.com/maazm007/vsdsquadron-mini-internship/assets/83294849/885a63bc-485e-4594-8d15-52f2ec8da800)
 
 </details> 
+<details>
 <summary><b>Task 5:</b>RISC-V Based Temperature Monitoring and Control System</summary>  
 <br>
 Objective: Create a temperature monitoring and control system that uses the VSDSquadron Mini to read temperature data from an analog sensor and control a fan or heater based on predefined temperature thresholds.
